@@ -7,7 +7,7 @@
 
 import UIKit
 
-
+// 272/182
 extension UIView {
     
     func prepareLayout(_ attribute: NSLayoutConstraint.Attribute,
@@ -58,10 +58,10 @@ extension UILabel{
 
 
     func prepareTextField(fontName: TitilliumWeb,size: FontSize,
-                          align:  NSTextAlignment = .left) {
+                          align:  NSTextAlignment = .left,color:UIColor = .white) {
         font = UIFont(name:fontName.rawValue,size:15)
         textAlignment = align
-        textColor = .black
+        textColor = color
     }
 }
 
@@ -80,7 +80,12 @@ extension UIImageView {
 extension UINavigationController{
     func changeHeader(_ scrollView: UIScrollView) {
         
-//        if (scrollView.contentOffset.y <= 0){       }
+        if (scrollView.contentOffset.y <= 0){
+                    navigationBar.setBackgroundImage(UIImage(), for: .default)
+                    navigationBar.shadowImage = UIImage()
+                    navigationBar.isTranslucent = true
+//                    view.backgroundColor = UIColor.white
+        }
 
 
         if (scrollView.contentOffset.y > 0 && scrollView.contentOffset.y < (scrollView.contentSize.height - scrollView.frame.size.height)){
@@ -111,5 +116,17 @@ extension UINavigationController{
         
 //        (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) {
 
+    }
+    
+    func prepareposterNavBar(){
+   
+        let titleLabel = UILabel()
+        titleLabel.textAlignment = .left
+        titleLabel.prepareTextField(fontName: .Bold, size: .title,color: .white)
+        titleLabel.text = "Romantic Comedy"
+        let titleDict = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = titleDict
+        navigationController?.navigationItem.titleView = titleLabel
+    
     }
 }

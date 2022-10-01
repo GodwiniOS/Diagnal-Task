@@ -39,18 +39,18 @@ class PosterCVCell: UICollectionViewCell {
         posterView.prepareLayout(.top)
         posterView.prepareLayout(.leading)
         posterView.prepareLayout(.trailing)
-        posterView.prepareLayout(.bottom,constant: -88)
+        posterView.prepareLayout(.bottom,constant: -60)
 
-        posterView.backgroundColor = .lightGray
+        posterView.backgroundColor = .black
         posterView.contentMode = .scaleAspectFit
 
         backGroundView.addSubview(titleLabel)
         titleLabel.prepareLayout(.trailing)
         titleLabel.prepareLayout(.leading)
         titleLabel.prepareLayout(.bottom,constant: -32)
-        titleLabel.prepareTextField(fontName: .Light, size: .title)
+        titleLabel.prepareTextField(fontName: .Light,
+                                    size: .title,color: .white)
         titleLabel.numberOfLines = 0
-        titleLabel.textColor = .white
     }
     
     func prepare(_ vm: ContentModel) {

@@ -21,23 +21,14 @@ class MovieListVC: UIViewController {
     
     private func prepareView(){
         
-        let titleLabel = UILabel()
-        titleLabel.textAlignment = .left
-        titleLabel.prepareTextField(fontName: .Bold, size: .title)
-        titleLabel.textColor = .white
-        titleLabel.text = "Romantic Comedy"
+
+
+
+        title = "Romantic Comedy"
+        
 
         
-        let titleDict = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.titleTextAttributes = titleDict
-        navigationItem.titleView = titleLabel
-
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
-        navigationController?.view.backgroundColor = UIColor.clear
-    
-
+        navigationController?.prepareposterNavBar()
         let searchImg:UIImage = UIImage(named: "SearchIcon")!
         searchImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         
@@ -76,8 +67,6 @@ class MovieListVC: UIViewController {
         vm.delegate = self
     }
     
-
-  
     
     @objc private func searchAction(){
         print("Search Click")
@@ -134,9 +123,21 @@ extension MovieListVC: UICollectionViewDelegateFlowLayout {
   ) -> CGSize {
     
     let paddingSpace = 8 * CGFloat(vm.itemsPerRow + 1)
-    let availableWidth = view.frame.width - CGFloat(paddingSpace)
+      let availableWidth = view.frame.size.width - CGFloat(paddingSpace)
     let widthPerItem = availableWidth / CGFloat(vm.itemsPerRow)
 
-      return CGSize(width: widthPerItem, height: widthPerItem*2.2)
+      
+      var height: CGFloat!
+
+      if UIApplication.shared.statusBarOrientation.isLandscape {
+          height = (ImageSize.width.rawValue/widthPerItem) * (ImageSize.height.rawValue*3)
+
+      } else {
+          height = (ImageSize.height.rawValue/widthPerItem) * (ImageSize.width.rawValue*0.75)
+
+      }
+      return CGSize(width: widthPerItem, height: height)
+
+
   }
 }

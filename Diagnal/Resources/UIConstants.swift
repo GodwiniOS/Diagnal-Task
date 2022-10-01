@@ -31,3 +31,8 @@ enum FontSize: CGFloat {
 }
 
 
+enum ImageSize: CGFloat{
+    case height = 272
+    case width = 182
+}
+
