@@ -79,54 +79,58 @@ extension UIImageView {
 
 extension UINavigationController{
     func changeHeader(_ scrollView: UIScrollView) {
-        
-        if (scrollView.contentOffset.y <= 0){
-                    navigationBar.setBackgroundImage(UIImage(), for: .default)
-                    navigationBar.shadowImage = UIImage()
-                    navigationBar.isTranslucent = true
-//                    view.backgroundColor = UIColor.white
-        }
+
+        if (scrollView.contentOffset.y <= 0){}
 
 
         if (scrollView.contentOffset.y > 0 && scrollView.contentOffset.y < (scrollView.contentSize.height - scrollView.frame.size.height)){
 
-            let gradientLayer = CAGradientLayer()
-
-            gradientLayer.frame = view.frame
-              gradientLayer.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
-
-
-              gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-              gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-
-              UIGraphicsBeginImageContext(gradientLayer.bounds.size)
-              gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
-              let image = UIGraphicsGetImageFromCurrentImageContext()
-              UIGraphicsEndImageContext()
+//            let gradientLayer = CAGradientLayer()
+//
+//            gradientLayer.frame = view.frame
+//              gradientLayer.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
+//
+//
+//              gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+//              gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+//
+//              UIGraphicsBeginImageContext(gradientLayer.bounds.size)
+//              gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
+//              let image = UIGraphicsGetImageFromCurrentImageContext()
+//              UIGraphicsEndImageContext()
 //            let img  = UIImage(named: "nav_bar")
 //            let imgV = UIImageView(frame: view.frame)
 //            imgV.contentMode = .scaleAspectFit
 //            imgV.image = img
-            
 //            let aView = ImageViewWithGradient(frame: view.frame)
-
-            navigationBar.setBackgroundImage(image, for: .default)
-
+//            navigationBar.setBackgroundImage(img, for: .default)
         }
-        
+
 //        (scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.size.height)) {
 
     }
     
     func prepareposterNavBar(){
-   
-        let titleLabel = UILabel()
-        titleLabel.textAlignment = .left
-        titleLabel.prepareTextField(fontName: .Bold, size: .title,color: .white)
-        titleLabel.text = "Romantic Comedy"
+        
+
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .clear
+        appearance.shadowColor = .clear
+        appearance.shadowImage = UIImage()
+        appearance.backgroundImage =  UIImage(named: "nav_bar")
         let titleDict = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.titleTextAttributes = titleDict
-        navigationController?.navigationItem.titleView = titleLabel
-    
+//
+        appearance.titleTextAttributes = titleDict
+        navigationBar.standardAppearance = appearance
+        
+//        let titleLabel = UILabel()
+//        titleLabel.textAlignment = .left
+//        titleLabel.prepareTextField(fontName: .Light, size: .title,
+//                                    color: .white)
+//        titleLabel.text = "Romantic"
+//        titleLabel.backgroundColor = .clear
+//        navigationItem.titleView = UIImageView(image: UIImage(named: "nav_bar"))
     }
 }

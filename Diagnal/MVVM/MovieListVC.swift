@@ -22,13 +22,9 @@ class MovieListVC: UIViewController {
     private func prepareView(){
         
 
-
-
         title = "Romantic Comedy"
-        
-
-        
         navigationController?.prepareposterNavBar()
+        
         let searchImg:UIImage = UIImage(named: "SearchIcon")!
         searchImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
         
@@ -87,12 +83,12 @@ extension MovieListVC: MovieListModelDelegate {
     }
 }
 
-extension MovieListVC:UIScrollViewDelegate{
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
-        navigationController?.changeHeader(scrollView)
-    }
-}
+//extension MovieListVC:UIScrollViewDelegate{
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//
+//        navigationController?.changeHeader(scrollView)
+//    }
+//}
 
 
 // MARK: - Collection View Delegate
@@ -133,7 +129,7 @@ extension MovieListVC: UICollectionViewDelegateFlowLayout {
           height = (ImageSize.width.rawValue/widthPerItem) * (ImageSize.height.rawValue*3)
 
       } else {
-          height = (ImageSize.height.rawValue/widthPerItem) * (ImageSize.width.rawValue*0.75)
+          height = (ImageSize.height.rawValue/widthPerItem) * (ImageSize.width.rawValue*0.6)
 
       }
       return CGSize(width: widthPerItem, height: height)
