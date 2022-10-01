@@ -10,7 +10,6 @@ import UIKit
 class HomeViewController: UIViewController {
 
 
-    // VC override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareView()

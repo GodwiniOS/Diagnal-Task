@@ -32,12 +32,11 @@ class MovieListVC: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = titleDict
         navigationItem.titleView = titleLabel
 
-        
-        
-
-        //        navigationController?.navigationBar.barTintColor = .red
-
-        
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = UIColor.clear
+    
 
         let searchImg:UIImage = UIImage(named: "SearchIcon")!
         searchImg.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
@@ -65,7 +64,6 @@ class MovieListVC: UIViewController {
                                            bottom: 5, right: 8)
         collectionView = UICollectionView(frame: .zero,
                                           collectionViewLayout: layout)
-        
         view.addSubview(collectionView)
         collectionView.prepareLayout(.top)
         collectionView.prepareLayout(.bottom)
@@ -102,6 +100,7 @@ extension MovieListVC: MovieListModelDelegate {
 
 extension MovieListVC:UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
         navigationController?.changeHeader(scrollView)
     }
 }

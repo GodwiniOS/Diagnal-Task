@@ -26,7 +26,7 @@ enum TitilliumWeb: String {
 
 enum FontSize: CGFloat {
     
-    case title = 36
+    case title = 60
     case subtite = 10
 }
 
