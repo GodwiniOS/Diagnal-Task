@@ -22,7 +22,7 @@ class MovieListVC: UIViewController {
     private func prepareView(){
         
 
-        title = "Romantic Comedy"
+//        title = "Romantic Comedy"
         navigationController?.prepareposterNavBar()
         
         let searchImg:UIImage = UIImage(named: "SearchIcon")!
@@ -40,26 +40,40 @@ class MovieListVC: UIViewController {
         leftBarButton.tintColor = .white
         
         navigationItem.rightBarButtonItem = RightBarButton
-        navigationItem.leftBarButtonItem = leftBarButton
         
+        let play = UIBarButtonItem(title: "Romantic Comedy",
+                                   style: .done, target: self, action: nil)
+        play.setTitleTextAttributes([
+            NSAttributedString.Key.font : UIFont(name: "TitilliumWeb-Light", size: 24)!,
+            NSAttributedString.Key.foregroundColor : UIColor.white,], for: .normal)
+        play.tintColor = .white
+
+        
+        navigationItem.leftBarButtonItems = [leftBarButton,play]
+        
+
         
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 8
         layout.minimumLineSpacing = 10
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: 6,left: 5,
-                                           bottom: 5, right: 8)
+//        layout.sectionInset = UIEdgeInsets(top: 6,left: 5,
+//                                           bottom: 5, right: 8)
+        layout.sectionInset = UIEdgeInsets(top: 36.px,left: 18.px,
+                                           bottom: 0, right: 12.px)
+        view.backgroundColor = .black
         collectionView = UICollectionView(frame: .zero,
                                           collectionViewLayout: layout)
         view.addSubview(collectionView)
         collectionView.prepareLayout(.top)
         collectionView.prepareLayout(.bottom)
-        collectionView.prepareLayout(.leading)
-        collectionView.prepareLayout(.trailing)
+        collectionView.prepareLayout(.leading,constant: 12.px)
+        collectionView.prepareLayout(.trailing,constant: -(18.px))
         collectionView.registerCell()
         collectionView.backgroundColor = .black
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.showsVerticalScrollIndicator = false
         vm.delegate = self
     }
     
@@ -85,7 +99,6 @@ extension MovieListVC: MovieListModelDelegate {
 
 //extension MovieListVC:UIScrollViewDelegate{
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//
 //        navigationController?.changeHeader(scrollView)
 //    }
 //}
@@ -118,20 +131,28 @@ extension MovieListVC: UICollectionViewDelegateFlowLayout {
     sizeForItemAt indexPath: IndexPath
   ) -> CGSize {
     
-    let paddingSpace = 8 * CGFloat(vm.itemsPerRow + 1)
+      let paddingSpace = 30.px * CGFloat(vm.itemsPerRow + 1)
       let availableWidth = view.frame.size.width - CGFloat(paddingSpace)
     let widthPerItem = availableWidth / CGFloat(vm.itemsPerRow)
 
       
       var height: CGFloat!
 
-      if UIApplication.shared.statusBarOrientation.isLandscape {
-          height = (ImageSize.width.rawValue/widthPerItem) * (ImageSize.height.rawValue*3)
+//      if UIApplication.shared.statusBarOrientation.isLandscape {
+//          height = ((ImageSize.width.rawValue/widthPerItem) * (ImageSize.height.rawValue*3))
+//
+//      } else {
+//          height = (ImageSize.height.rawValue/widthPerItem) * (ImageSize.width.rawValue*0.64)
+//
+//      }
+      
+//      if UIApplication.shared.statusBarOrientation.isLandscape {
+      height = widthPerItem * (ImageSize.height.rawValue/ImageSize.width.rawValue) + 130.px
 
-      } else {
-          height = (ImageSize.height.rawValue/widthPerItem) * (ImageSize.width.rawValue*0.6)
-
-      }
+//      } else {
+//          height = (ImageSize.height.rawValue/widthPerItem) * (ImageSize.width.rawValue)
+//
+//      }
       return CGSize(width: widthPerItem, height: height)
 
 
